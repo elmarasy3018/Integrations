@@ -27,11 +27,6 @@ class GoogleSheetController extends Controller
         // $range = ($lastRow[0]->lastRow + 2) . ':999';
         // dd($range);
 
-        // Sheets::spreadsheet($id)->sheet('Sheet1')->range('A4')->update([['3', 'name3', 'mail3']]);
-        // $values = Sheets::range('')->all();
-        // $values = Sheets::spreadsheet($id)->sheet('Sheet1')->range('V2:V10')->update([['3']]);
-        // dd($values);
-
         $sheets = Sheets::spreadsheet($id)->sheet('Sheet1')->get();
         // dd($sheets);
         // $header = $sheets->pull(0);
@@ -64,6 +59,7 @@ class GoogleSheetController extends Controller
         return view('google-sheet', ['table' => $table]);
     }
 
+    // extract the id from the url
     private function getSpreadsheetIdFromLink($link)
     {
         preg_match('/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/', $link, $matches);

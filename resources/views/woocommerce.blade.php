@@ -12,17 +12,17 @@
             @csrf
             <div class="mb-4">
                 <label for="store_url" class="block text-gray-700 text-sm font-bold mb-2">Store Url:</label>
-                <input type="text" id="store_url" name="store_url" value="https://woo-sweetly-important-panda.wpcomstaging.com/"
+                <input type="text" id="store_url" name="store_url" value="https://ahmedhisham.socialgossip.website/"
                     class="w-full p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:border-blue-400">
             </div>
             <div class="mb-4">
                 <label for="consumer_key" class="block text-gray-700 text-sm font-bold mb-2">Consumer Key:</label>
-                <input type="text" id="consumer_key" name="consumer_key" value="ck_a713c773dbf64a0848b52bd4425af1687394632b"
+                <input type="text" id="consumer_key" name="consumer_key" value="ck_2e1c2433e6d749f7e3850d0250e52a3fed361fd6"
                     class="w-full p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:border-blue-400">
             </div>
             <div class="mb-4">
                 <label for="consumer_secret" class="block text-gray-700 text-sm font-bold mb-2">Consumer Secret:</label>
-                <input type="text" id="consumer_secret" name="consumer_secret" value="cs_1b9251a89be1cd911c3860cb1f44eae654b1a679"
+                <input type="text" id="consumer_secret" name="consumer_secret" value="cs_dfd798380086a9eca48d0577ab03fc2b6abd1800"
                     class="w-full p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:border-blue-400">
             </div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Fetch

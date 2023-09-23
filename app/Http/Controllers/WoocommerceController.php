@@ -22,8 +22,8 @@ class WoocommerceController extends Controller
         // config(['woocommerce.consumer_key' => 'ck_a713c773dbf64a0848b52bd4425af1687394632b']);
         // config(['woocommerce.consumer_secret' => 'cs_1b9251a89be1cd911c3860cb1f44eae654b1a679']);
 
-        $products = Product::all();
-        // dd($products);
-        return $products;
+        $orders = Order::all();
+        // dd($orders);
+        return $orders;
     }
 }

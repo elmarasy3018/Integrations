@@ -12,12 +12,12 @@
             @csrf
             <div class="mb-4">
                 <label for="access_token" class="block text-gray-700 text-sm font-bold mb-2">Shopify Access Token:</label>
-                <input type="text" id="access_token" name="access_token" placeholder="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"
+                <input type="text" id="access_token" name="access_token" value="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"
                     class="w-full p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:border-blue-400">
             </div>
             <div class="mb-4">
                 <label for="domain" class="block text-gray-700 text-sm font-bold mb-2">Shopify Domain:</label>
-                <input type="text" id="domain" name="domain" placeholder="ckdemo1.myshopify.com"
+                <input type="text" id="domain" name="domain" value="ckdemo1.myshopify.com"
                     class="w-full p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:border-blue-400">
             </div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Fetch

@@ -16,7 +16,7 @@ class ShopifyController extends Controller
         config(['shopify.credentials.access_token' => $request->input('access_token')]);
         config(['shopify.credentials.domain' => $request->input('domain')]);
         $shopify = \Signifly\Shopify\Factory::fromConfig();
-        $count = $shopify->getDraftOrders();  // On Live Change From Draft to Orders
+        $count = $shopify->getOrders();  // On Live Change From Draft to Orders
         // dd($count);
         return $count;
     }

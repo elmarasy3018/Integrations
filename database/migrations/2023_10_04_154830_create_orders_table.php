@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('address');//
             $table->string('city');//
             $table->string('phone');//
-            $table->text('landing_page')->nullable();//www.
+            $table->text('landing_page')->nullable();//www.land
             $table->text('notice')->nullable();//
             $table->text('comment')->nullable();//null
             $table->text('reject_reason')->nullable();

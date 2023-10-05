@@ -42,16 +42,28 @@ class GoogleSheetController extends Controller
         //         ->update(['lastRow' => $sheets[count($sheets) - 1][0]]);
         // }
 
-        $table = '<table>';
         if ($data) {
             foreach ($data as $row) {
-                $table .= '<tr>';
-                foreach ($row as $cell) {
-                    $table .= '<td class="py-2 px-4 border border-gray-200">' . $cell . '</td>';
-                }
-                $table .= '</tr>';
+                // dd($row);
+                DB::insert('insert into google (order_id, customer_id, product_id, user_id) values(?,?,?,?)', [$row[1], $row[5], $row[13], -1]);
             }
-            $table .= '</table>';
+            // DB::select('select * from google where active = ?', [1]);
+            $db = DB::select('select distinct order_id, user_id from google');
+
+            foreach ($db as $row) {
+                $order = DB::select('select * from google where order_id = ? AND user_id = ?', [$row[0], $row[1]]);
+                dd($order);
+            }
+
+            // $table = '<table>';
+            // foreach ($db as $row) {
+            //     $table .= '<tr>';
+            //     foreach ($row as $cell) {
+            //         $table .= '<td class="py-2 px-4 border border-gray-200">' . $cell . '</td>';
+            //     }
+            //     $table .= '</tr>';
+            // }
+            // $table .= '</table>';
         } else {
             $table = 'No data';
         }

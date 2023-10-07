@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Signifly\Shopify\Factory;
 
@@ -19,8 +20,14 @@ class ShopifyController extends Controller
 
         DB::transaction(function () {
 
+            $x = DB::table('marketer_stores')
+                ->select('last_order_id')
+                ->where('url', 'ckdemo1.myshopify.com')
+                ->get();
+            dd($x);
+
             $shopify = Factory::fromConfig();
-            $orders = $shopify->getOrders();  // On Live Change From Draft to Orders
+            $orders = $shopify->getOrders(); // On Live Change From Draft to Orders
 
             foreach ($orders as $order) {
                 $ordertoArray = $order->toArray();
@@ -42,18 +49,23 @@ class ShopifyController extends Controller
                     // 'country_id' => Country::where('code', $ordertoArray['note_attributes'][0]['value'])->first()->id,
                     // 'created_at' => $ordertoArray['created_at'],
                     // 'updated_at' => $ordertoArray['created_at'],
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
                 ]);
                 $order_id = DB::getPdo()->lastInsertId();
                 foreach ($ordertoArray['line_items'] as $line) {
                     DB::table('order_product_sku')->insert([
+                        'product_sku_id' => '2',
                         // 'product_sku_id' => Country::where('code', $ordertoArray['line_items']['sku'])->first()->id,
                         'order_id' => $order_id,
                         'type' => 'Normal',
                         'quantity' => $line['quantity'],
                         'piece_price' => $line['price'],
                         'final_price_for_product' => $line['quantity'] * $line['price'],
-                    // 'created_at' => $ordertoArray['created_at'],
-                    // 'updated_at' => $ordertoArray['created_at'],
+                        // 'created_at' => $ordertoArray['created_at'],
+                        // 'updated_at' => $ordertoArray['created_at'],
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
                     ]);
                 }
             }

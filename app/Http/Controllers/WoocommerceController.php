@@ -19,14 +19,8 @@ class WoocommerceController extends Controller
         config(['woocommerce.consumer_secret' => $request->input('consumer_secret')]);
 
         DB::transaction(function () {
-            $x = DB::table('marketer_stores')
-                ->select('last_order_id')
-                ->where('url', 'https://ahmedhisham.socialgossip.website/')
-                ->get();
-            dd($x);
 
             $orders = Order::all();
-
             dd($orders);
 
             foreach ($orders as $order) {

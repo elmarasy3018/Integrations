@@ -51,23 +51,12 @@ class GoogleSheetController extends Controller
             $db = DB::select('select distinct order_id, user_id from google');
 
             foreach ($db as $row) {
-                $order = DB::select('select * from google where order_id = ? AND user_id = ?', [$row[0], $row[1]]);
+                $order = DB::select('select * from google where order_id = ? AND user_id = ?', [$row->order_id, $row->user_id]);
                 dd($order);
             }
-
-            // $table = '<table>';
-            // foreach ($db as $row) {
-            //     $table .= '<tr>';
-            //     foreach ($row as $cell) {
-            //         $table .= '<td class="py-2 px-4 border border-gray-200">' . $cell . '</td>';
-            //     }
-            //     $table .= '</tr>';
-            // }
-            // $table .= '</table>';
         } else {
             $table = 'No data';
         }
-
         return view('google-sheet', ['table' => $table]);
     }
 

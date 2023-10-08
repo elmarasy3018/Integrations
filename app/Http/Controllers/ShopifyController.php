@@ -20,12 +20,6 @@ class ShopifyController extends Controller
 
         DB::transaction(function () {
 
-            $x = DB::table('marketer_stores')
-                ->select('last_order_id')
-                ->where('url', 'ckdemo1.myshopify.com')
-                ->get();
-            dd($x);
-
             $shopify = Factory::fromConfig();
             $orders = $shopify->getOrders(); // On Live Change From Draft to Orders
 

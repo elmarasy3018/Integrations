@@ -23,6 +23,7 @@ class ShopifyController extends Controller
             $shopify = Factory::fromConfig();
             $orders = $shopify->getOrders(); // On Live Change From Draft to Orders
 
+            dd($orders);
             foreach ($orders as $order) {
                 $ordertoArray = $order->toArray();
 

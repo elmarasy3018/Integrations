@@ -68,7 +68,7 @@ class GoogleSheetController extends Controller
             // $order->final_price = $total_price;
             // $order->save();
         }
-        // if (count($sheets) - 1 > -1) {
+        // if (count($lines) > 0) {
         //     DB::table('header')
         //         ->where('sheetID', $id)
         //         ->update(['lastRow' => $sheets[count($sheets) - 1][0]]);

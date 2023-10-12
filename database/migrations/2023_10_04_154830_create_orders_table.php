@@ -23,8 +23,8 @@ return new class extends Migration
             $table->text('comment')->nullable();//null
             $table->text('reject_reason')->nullable();
             $table->text('cancel_reason')->nullable();
-            $table->integer('product_number');
-            $table->bigInteger('final_price');
+            $table->integer('product_number')->nullable();
+            $table->bigInteger('final_price')->nullable();
             $table->string('marketer_id')//auth
                 ->nullable()
                 ->constrained()

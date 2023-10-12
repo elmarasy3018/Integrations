@@ -21,43 +21,59 @@ class GoogleSheetController extends Controller
         //     ->select('lastRow')
         //     ->where('sheetID', $id)
         //     ->get();
-
         // dd($lastRow[0]->lastRow + 1);
-
         // $range = ($lastRow[0]->lastRow + 2) . ':999';
         // dd($range);
 
-        $sheets = Sheets::spreadsheet($id)->sheet('Sheet1')->get();
-        // dd($sheets);
-        // $header = $sheets->pull(0);
-        // $posts = Sheets::collection($header, $sheets);
-        // $posts = $posts->take(5000);
+        $sheets = Sheets::spreadsheet($id)->sheet('Sheet1')->range('3:12')->get();
+        $lines = $sheets->toArray();
 
-        $data = $sheets->toArray();
-
-        // dd($sheets[count($sheets) - 1][0]);
+        foreach ($lines as $line) {
+            if ($line[1]) {
+                DB::table('orders')->insert([
+                    // 'ip' => $line[7],
+                    // 'approximate_location' => $location->timezone . '-' . $location->countryName . '-' . $location->regionName . '-' . $location->cityName,
+                    'name' => $line[6],
+                    'address' => $line[9],
+                    'city' => $line[8],
+                    'phone' => $line[11],
+                    // 'landing_page' => $line['order_status_url'],
+                    // 'notice' => $line['note'],
+                    // 'product_number' => count($line['line_items']), ----->> need call
+                    // 'final_price' => $line['total_price'],
+                    // 'country_id' => Country::where('code', $line['note_attributes'][0]['value'])->first()->id,
+                    // 'created_at' => $line['created_at'],
+                    // 'updated_at' => $line['created_at'],
+                ]);
+                $order_id = $line[2];
+                $product_number = 1;
+                $total_price = 0;
+            }
+            DB::table('order_product_sku')->insert([
+                // 'product_sku_id' => '2',
+                // 'product_sku_id' => Country::where('code', $ordertoArray['line_items']['sku'])->first()->id,
+                'order_id' => $order_id,
+                'type' => 'Normal',
+                'quantity' => $line[18],
+                'piece_price' => $line[17],
+                'final_price_for_product' => $line[19],
+                // 'created_at' => $ordertoArray['created_at'],
+                // 'updated_at' => $ordertoArray['created_at'],
+            ]);
+            $total_price += $line[19];
+            DB::table('orders')
+                ->where('id', $order_id)
+                ->update(['final_price' => $total_price, 'product_number' => $product_number++]);
+            // $order = DB::table('orders')->find($order_id); ----------> ezzz
+            // $order->final_price = $total_price;
+            // $order->save();
+        }
         // if (count($sheets) - 1 > -1) {
         //     DB::table('header')
         //         ->where('sheetID', $id)
         //         ->update(['lastRow' => $sheets[count($sheets) - 1][0]]);
         // }
-
-        if ($data) {
-            foreach ($data as $row) {
-                // dd($row);
-                DB::insert('insert into google (order_id, customer_id, product_id, user_id) values(?,?,?,?)', [$row[1], $row[5], $row[13], -1]);
-            }
-            // DB::select('select * from google where active = ?', [1]);
-            $db = DB::select('select distinct order_id, user_id from google');
-
-            foreach ($db as $row) {
-                $order = DB::select('select * from google where order_id = ? AND user_id = ?', [$row->order_id, $row->user_id]);
-                dd($order);
-            }
-        } else {
-            $table = 'No data';
-        }
-        return view('google-sheet', ['table' => $table]);
+        return 'Done';
     }
 
     // extract the id from the url

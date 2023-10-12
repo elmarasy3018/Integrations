@@ -12,7 +12,7 @@
             @csrf
             <div class="mb-4">
                 <label for="access_token" class="block text-gray-700 text-sm font-bold mb-2">Shopify Access Token:</label>
-                <input type="text" id="access_token" name="access_token" value="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"
+                <input type="text" id="access_token" name="access_token" value="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"
                     class="w-full p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:border-blue-400">
             </div>
             <div class="mb-4">

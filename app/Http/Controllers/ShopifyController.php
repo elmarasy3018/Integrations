@@ -21,10 +21,11 @@ class ShopifyController extends Controller
         // DB::transaction(function () {
 
         $shopify = Factory::fromConfig();
-        // $orders = $shopify->getOrders(); // On Live Change From Draft to Orders
-        $orders = $shopify->put('orders/5480056783136.json', ["contact_email" => "test2@test.com"]);
+        // $orders = $shopify->getOrders();
+        $orders = $shopify->get('orders.json?fulfillment_status=');
+        // $orders = $shopify->put('orders/5480056783136.json', ["contact_email" => "test2@test.com"]);
         // $orders = $shopify->updateOrder(5480056783136, ["contact_email" => "test2@test.com"]);
-        $orders = $shopify->getOrder(5480056783136);
+        // $orders = $shopify->getOrder(5480056783136);
         return $orders;
         foreach ($orders as $order) {
             $ordertoArray = $order->toArray();
